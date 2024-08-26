@@ -1,0 +1,101 @@
+---
+
+---
+
+<header class="bg-dark-900 transition">
+	<div id="mobileHeader">
+		<div class="">logo</div>
+		<button id="headerToggle">open</button>
+	</div>
+	<div id="headerModal" class="modal modal-invisible">
+		<nav id="mobileMenu" class="drawer-invisible">mobile menu</nav>
+	</div>
+
+
+	<nav id="desktopHeader">dektop menu</nav>
+</header>
+<script>
+	function toggleMenuView() {
+		console.log('click')
+		headerModal?.classList.toggle('modal-visible')
+		headerModal?.classList.toggle('modal-invisible')
+		setTimeout(() => {
+			headerModal?.classList.toggle('modal-background')
+		}, 150)
+	}
+	
+	const headerModal = document.getElementById('headerModal')
+	const headerToggle = document.getElementById('headerToggle')
+
+	headerToggle?.addEventListener('click', () => {
+		toggleMenuView()
+	})
+	headerToggle?.addEventListener('touch', () => {
+		toggleMenuView()
+	})
+
+	headerModal?.addEventListener('click', (e) => {
+		if (e.target !== headerModal) return
+		console.log(e.target)
+		toggleMenuView()
+	})
+
+</script>
+<style>
+	#headerToggle {
+		display: none;
+	}
+
+	#mobileHeader {
+		display: none;
+	}
+
+	#desktopHeader {
+		display: flex;
+	}
+
+	.modal {
+		display: flex;
+		justify-content: flex-end;
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		top: 0; 
+		cursor: pointer;
+		transition: 0.3s;
+	}
+	
+	.modal-background {
+		backdrop-filter: blur(6px);
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	.modal-visible {
+		right: 0px;
+	}
+
+	.modal-invisible {
+		right: -100vw;
+	}
+
+	#mobileMenu {
+		width: 300px;
+		height: 100vh;
+		cursor: default;
+		background-color: royalblue;
+	}
+
+	@media screen and (max-width: 768px) {
+		#mobileHeader {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		#headerToggle {
+			display: block;
+		}
+		#desktopHeader {
+			display: none;
+		}
+	}
+</style>

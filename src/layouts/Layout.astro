@@ -1,0 +1,41 @@
+---
+import '@fontsource/inter/latin-400.css'
+import '@fontsource/inter/latin-500.css'
+import { ViewTransitions } from 'astro:transitions'
+import Header from '../components/layout/Header.astro'
+
+interface Props {
+	description: string
+	title: string
+}
+
+const { description, title } = Astro.props
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+
+		<!-- will remove it -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<!-- will remove it -->
+
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		<ViewTransitions />
+	</head>
+
+	<body class="bg-dark-950 text-white transition">
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<!-- there will be footer -->
+	</body>
+</html>
