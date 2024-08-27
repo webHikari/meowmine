@@ -29,9 +29,33 @@ const { description, title } = Astro.props
 		<meta name="description" content={description} />
 		<title>{title}</title>
 		<ViewTransitions />
+		<style>
+			@font-face {
+				font-family: 'Geist-Light';
+				src: url('/assets/fonts/Geist-Light.woff2');
+				font-weight: 400;
+				font-style: normal;
+			}
+
+			body {
+				background: #FEFEFE;
+				color: #1a1a1a;
+			}
+
+			main {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			@media screen and (max-width: 1200px) {
+				main {
+					padding: 0 0.75rem;
+				}
+			}
+		</style>
 	</head>
 
-	<body class="bg-dark-950 text-white transition">
+	<body class="transition">
 		<Header />
 		<main>
 			<slot />

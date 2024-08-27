@@ -2,28 +2,39 @@
 
 ---
 
-<header class="bg-dark-900 transition">
+<header class="transition">
 	<div id="mobileHeader">
-		<div class="">logo</div>
+		<div class="logo">MeowMine</div>
 		<button id="headerToggle">open</button>
 	</div>
 	<div id="headerModal" class="modal modal-invisible">
 		<nav id="mobileMenu" class="drawer-invisible">mobile menu</nav>
 	</div>
 
+	<nav id="desktopHeader">
+		<a href="/">
+			<div class="logo">MeowMine</div>
+		</a>
 
-	<nav id="desktopHeader">dektop menu</nav>
+		<ul class="linksList">
+			<li><a href="/">Главная</a></li>
+			<li><a href="/about">О нас</a></li>
+			<li><a href="/blog">Блог</a></li>
+			<li><a href="#">Discord</a></li>
+		</ul>
+		
+		<a href="/purchase">Купить проходку</a>
+	</nav>
 </header>
 <script>
 	function toggleMenuView() {
-		console.log('click')
 		headerModal?.classList.toggle('modal-visible')
 		headerModal?.classList.toggle('modal-invisible')
 		setTimeout(() => {
 			headerModal?.classList.toggle('modal-background')
 		}, 150)
 	}
-	
+
 	const headerModal = document.getElementById('headerModal')
 	const headerToggle = document.getElementById('headerToggle')
 
@@ -36,12 +47,19 @@
 
 	headerModal?.addEventListener('click', (e) => {
 		if (e.target !== headerModal) return
-		console.log(e.target)
 		toggleMenuView()
 	})
-
+	headerModal?.addEventListener('touch', (e) => {
+		if (e.target !== headerModal) return
+		toggleMenuView()
+	})
 </script>
 <style>
+	header {
+		padding: 0.75rem 0;
+		font-size: 17px;
+	}
+
 	#headerToggle {
 		display: none;
 	}
@@ -60,29 +78,64 @@
 		width: 100vw;
 		height: 100vh;
 		position: fixed;
-		top: 0; 
+		top: 0;
 		cursor: pointer;
-		transition: 0.3s;
+		opacity: 0;
+		transition:
+			0.5s opacity ease-in-out,
+			0.5s right ease-out;
 	}
-	
+
 	.modal-background {
 		backdrop-filter: blur(6px);
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.2);
 	}
 
 	.modal-visible {
 		right: 0px;
+		opacity: 1;
 	}
 
 	.modal-invisible {
 		right: -100vw;
+		transition: 0.3s;
 	}
 
 	#mobileMenu {
 		width: 300px;
 		height: 100vh;
 		cursor: default;
-		background-color: royalblue;
+		padding: 0.5rem;
+		background-color: #fefefe;
+	}
+
+	#desktopHeader {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.linksList {
+
+	}
+
+	.linksList li {
+		display: inline;
+	}
+
+	.linksList a {
+		padding: 0.5rem;
+	}
+
+	.logo {
+		width: 137px;
+	}
+
+	@media screen and (max-width: 1200px) {
+		header {
+			padding: 0.5rem 0.75rem;
+		}
 	}
 
 	@media screen and (max-width: 768px) {

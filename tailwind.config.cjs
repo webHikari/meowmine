@@ -14,7 +14,7 @@ module.exports = {
       dark: colors.zinc,
     },
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
+      sans: ['Geist-Light'],
     },
     fontSize: {
       xs: ['0.75rem', '1rem'],
