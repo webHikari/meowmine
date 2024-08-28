@@ -1,8 +1,7 @@
 ---
 import '@fontsource/inter/latin-400.css'
 import '@fontsource/inter/latin-500.css'
-import { ViewTransitions } from 'astro:transitions'
-import Header from '../components/layout/Header.astro'
+import Header from '../components/Header.astro'
 
 interface Props {
 	description: string
@@ -28,7 +27,6 @@ const { description, title } = Astro.props
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
-		<ViewTransitions />
 		<style>
 			@font-face {
 				font-family: 'Geist-Light';
@@ -55,11 +53,12 @@ const { description, title } = Astro.props
 		</style>
 	</head>
 
-	<body class="transition">
+	<body>
 		<Header />
 		<main>
 			<slot />
 		</main>
 		<!-- there will be footer -->
+		
 	</body>
 </html>

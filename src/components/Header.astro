@@ -1,0 +1,195 @@
+---
+import SuperLink from './SuperLink.astro'
+---
+<style>
+	header {
+		padding: 0.75rem 0;
+		font-size: 17px;
+	}
+
+	#headerToggle {
+		display: none;
+	}
+
+	#mobileHeader {
+		display: none;
+	}
+
+	#desktopHeader {
+		display: flex;
+	}
+	.modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.3);
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 0.5s ease;
+	}
+
+	.modal-invisible {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.modal-visible {
+		opacity: 1;
+		backdrop-filter: blur(5px);
+		visibility: visible;
+	}
+
+	.modal-close {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+	}
+
+	#mobileMenu {
+		position: fixed;
+		width: 250px;
+		height: 100vh;
+		cursor: default;
+		padding: 0.5rem;
+		background-color: #fefefe;
+	}
+
+	.drawer-invisible {
+		right: -250px;
+		transition: right 0.5s ease;
+	}
+
+	.drawer-visible {
+		right: 0;
+		transition: right 0.5s ease;
+	}
+
+	#desktopHeader {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.linksList {
+		background: #e5e5e5;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.3rem;
+	}
+
+	.linksList li {
+		display: inline;
+	}
+
+	.linksList a {
+		padding: 0.5rem;
+	}
+
+	.logo {
+		/* width: 137px; */
+		text-decoration: none;
+		color: #1a1a1a;
+		background: #ffd3d3;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.3rem;
+	}
+
+	@media screen and (max-width: 1200px) {
+		header {
+			padding: 0.5rem 0.75rem;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#mobileHeader {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		#headerToggle {
+			display: block;
+		}
+		#desktopHeader {
+			display: none;
+		}
+		#mobileMenu {
+			font-size: 18px;
+		}
+
+		.linksList {
+			background: transparent;
+		}
+
+		.linksList li {
+			display: block;
+		}
+	}
+</style>
+<header>
+	<div id="mobileHeader">
+		<div class="logo">MeowMine</div>
+		<button id="headerToggle">open</button>
+	</div>
+	<div id="headerModal" class="modal modal-invisible">
+		<nav id="mobileMenu" class="drawer-invisible">
+			<button class="modal-close" id="modalClose">close</button>
+
+			<ul class="linksList">
+				<li><a href="/">Главная</a></li>
+				<li><a href="/about">О нас</a></li>
+				<li><a href="/blog">Блог</a></li>
+				<li><a href="#">Discord</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<nav id="desktopHeader">
+		<a href="/">
+			<div class="logo">MeowMine</div>
+		</a>
+
+		<ul class="linksList">
+			<li><a href="/">Главная</a></li>
+			<li><a href="/about">О нас</a></li>
+			<li><a href="/blog">Блог</a></li>
+			<li><a href="#">Discord</a></li>
+		</ul>
+
+		<SuperLink href="/purchase">Купить проходку</SuperLink>
+	</nav>
+</header>
+
+<script>
+	function toggleMenuView() {
+		headerModal?.classList.toggle('modal-visible')
+		headerModal?.classList.toggle('modal-invisible')
+		mobileMenu?.classList.toggle('drawer-invisible')
+		mobileMenu?.classList.toggle('drawer-visible')
+	}
+
+	const headerModal = document.getElementById('headerModal')
+	const headerToggle = document.getElementById('headerToggle')
+	const mobileMenu = document.getElementById('mobileMenu')
+	const modalClose = document.getElementById('modalClose')
+
+	headerToggle?.addEventListener('click', () => {
+		toggleMenuView()
+	})
+
+	modalClose?.addEventListener('click', () => {
+		toggleMenuView()
+	})
+
+	headerModal?.addEventListener('click', (e) => {
+		if (e.target === headerModal) {
+			toggleMenuView()
+		}
+	})
+</script>

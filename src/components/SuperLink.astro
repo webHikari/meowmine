@@ -1,0 +1,17 @@
+---
+const { href } = Astro.props
+---
+<a href={href} class="superLink">
+    <slot />
+</a>
+<style>
+    .superLink {
+        text-decoration: none;
+        color: #1a1a1a;
+        background: #ffd3d3;
+        display: flex;
+        align-items: center;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.3rem;
+    }
+</style>
